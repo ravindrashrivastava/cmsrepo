@@ -1,32 +1,11 @@
 <!-- Blog Sidebar Widgets Column -->
 <div class="col-md-4">
 
-<?php 
-if (isset($_GET["submit"])) {
-    $search = $_GET["search"];
-    $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
-    $search_query = mysqli_query($connection, $query);
-    if(!$search_query){
-        die("query failed" . mysqli_error($connection));
-    } 
-
-    $count = mysqli_num_rows($search_query);
-    if ($count == 0) {
-        echo "<h1>no result found</h1>";
-    } else {
-        echo "<h1>found something</h1>";
-    }
-
-}
-
-
-
-?>
 
 <!-- Blog Search Well -->
 <div class="well">
     <h4>Blog Search</h4>
-    <form action="" method="get">
+    <form action="search.php" method="get">
         <div class="input-group">
             <input name="search" type="text" class="form-control">
             <span class="input-group-btn">
