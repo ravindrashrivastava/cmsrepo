@@ -18,7 +18,6 @@
                     include "includes/db.php";
                     $query = "SELECT * FROM category";
                     $all_cat = mysqli_query($connection ,$query);
-                    print_r(mysqli_fetch_assoc($all_cat));
                     while ($row = mysqli_fetch_assoc($all_cat)) {
                         $cat_title = $row["cat_title"];
                         echo "<li><a href='#'>{$cat_title}</a></li>";
