@@ -43,7 +43,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i>Category</a>
+                        <a href="categories.php"><i class="fa fa-fw fa-desktop"></i>Categories</a>
                     </li>
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>Comments</a>
