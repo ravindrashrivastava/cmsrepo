@@ -71,10 +71,6 @@
                                         echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>" ;
                                         echo "</tr>";
                                     }
-                                
-                                    ?>
-
-                                    <?php 
                                     
                                     if (isset($_GET["delete"])) {
                                     $del_cat_id = $_GET["delete"];
@@ -95,4 +91,6 @@
             <!-- /.container-fluid -->
 
         </div>
-        <!-- /#page-wrapper --> include "includes/admin_footer.php"; ?>
+        <!-- /#page-wrapper --> 
+    </div>   
+<?php include "includes/admin_footer.php"; ?>
