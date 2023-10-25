@@ -21,8 +21,8 @@
                     <div class="col-xs-6">
                         <?php
                             
-                            if (isset($_GET["submit"])) {
-                                $cat_title = $_GET["cat_title"];
+                            if (isset($_POST["submit"])) {
+                                $cat_title = $_POST["cat_title"];
 
                                 if ($cat_title == "" || empty($cat_title)) {
                                     echo "This field should not be empty";
@@ -36,7 +36,7 @@
                             }
                             
                         ?>
-                        <form action="categories.php" method="get">
+                        <form action="categories.php" method="post">
                             <div class="form-group">
                                 <label for="cat-title">Add Category</label>
                                 <input type="text" class="form-control" name="cat_title">
@@ -46,50 +46,21 @@
                             </div>
 
                         </form>
-                        <!-- edit form  -->
-                        <form action="categories.php" method="get">
-                            <?php
-                                if(isset($_GET["edit"])) {
-                                    $edit_cat_id = $_GET["edit"];
-                                    $query = "SELECT * FROM category WHERE cat_id = $edit_cat_id";
-                                    $update_query = mysqli_query($connection, $query);
-                                    while($row = mysqli_fetch_assoc($update_query)) {
-                                        $cat_id = $row["cat_id"];
-                                        $cat_title = $row["cat_title"];
-                                    }
-                                }
-                            ?>
-                            <div class="form-group">
-                                <label for="cat-title">Edit Category</label>
-                                <input
-                                    value="<?php if(isset($cat_title)) {
-                                        echo $cat_title;
-                                    } ?>"
-                                    type="text" class="form-control" name="cat_title">
-                            </div>
 
-                            <?php
-                                // update query
-                                // if(isset($_POST["update_category"])){
-                                    
-                                // }
-                            ?>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary" name="update_category"
-                                    value="Update Category">
-                            </div>
+                        <?php 
+                        if (isset($_GET["edit"])) {
+                            $cat_id = $_GET["edit"];
+                            include "includes/update_categories.php";
+                        }
+                        ?>
 
-                        </form>
-                        <!-- edit form end -->
 
+                        
                     </div>
                     <!--category form end -->
+
+                    <!-- category table display -->
                     <div class="col-xs-6">
-                        <?php
-                            $query = "SELECT * FROM category";
-                            $select_category = mysqli_query($connection, $query);
-                               
-                        ?>
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <th>Id</th>
@@ -98,6 +69,8 @@
                             <tbody>
 
                                 <?php
+                                    $query = "SELECT * FROM category";
+                                    $select_category = mysqli_query($connection, $query);
                                     while ($row = mysqli_fetch_assoc($select_category)) {
                                         $cat_id = $row["cat_id"];
                                         $cat_title = $row["cat_title"];
