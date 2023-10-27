@@ -1,6 +1,6 @@
 <?php
 
-function insertCategory() {
+function insert_category() {
     global $connection;
     if (isset($_POST["submit"])) {
         $cat_title = $_POST["cat_title"];
@@ -17,7 +17,7 @@ function insertCategory() {
     }
 }
 
-function selectAllCategories() {
+function select_all_categories() {
     global $connection;
     $query = "SELECT * FROM category";
     $select_category = mysqli_query($connection, $query);

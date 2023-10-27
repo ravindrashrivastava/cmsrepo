@@ -25,8 +25,8 @@
                             $source ="";
                         }
                         switch ($source) {
-                            case 10:
-                                echo "this is 10";
+                            case "add_post":
+                                include "includes/add_post.php";
                                 break;
                             case 15:
                                 echo "this is 15";
