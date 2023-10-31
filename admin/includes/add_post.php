@@ -67,3 +67,4 @@ if (isset($_POST["create_post"])) {
     </div>
     
 </form>
+<?php include "includes/admin_footer.php"; ?>
