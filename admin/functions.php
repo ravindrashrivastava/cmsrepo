@@ -40,3 +40,10 @@ function select_all_categories() {
     }
 
 }
+
+function confirm_query($result){
+    global $connection;
+    if (!$result) {
+        die ("QUERY FAILED" . mysqli_error($connection));
+    }
+}
