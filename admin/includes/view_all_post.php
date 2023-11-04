@@ -17,7 +17,7 @@
         <?php 
             $query = "SELECT * FROM posts";
             $select_post = mysqli_query($connection, $query);
-            while ($row = mysqli_fetch_array($select_post)) {
+            while ($row = mysqli_fetch_assoc($select_post)) {
                 $post_id = $row["post_id"];
                 $post_author = $row["post_author"];
                 $post_title = $row["post_title"];
