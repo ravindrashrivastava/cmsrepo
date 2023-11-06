@@ -1,7 +1,7 @@
 <?php 
 
 if (isset($_POST["create_post"])) {
-    $post_title = $_POST["title"];
+    $post_title = $_POST["post_title"];
     $post_categoty_id = $_POST["post_category_id"];
     $post_author = $_POST["post_author"];
     $post_status = $_POST["post_status"];
@@ -26,7 +26,7 @@ if (isset($_POST["create_post"])) {
     if (!$create_post_query) {
     die("Querry Failed " . mysqli_error($connection));
     } else {
-        echo "<h3 class='text-success'>Post created sucessfully</h3>";
+        echo "<h2 class='text-success'>Post created sucessfully</h2>";
     }
 }
 
@@ -36,7 +36,7 @@ if (isset($_POST["create_post"])) {
 
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input type="text" class="form-control" name="title">
+        <input type="text" class="form-control" name="post_title">
     </div>
     <div class="form-group">
         <label for="title">Post Category ID</label>

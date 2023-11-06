@@ -3,9 +3,9 @@ if(isset($_GET["p_id"])){
     $the_post_id =  $_GET["p_id"];
 }
 
-    $query = "SELECT * FROM posts";
+    $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
     $select_post_by_id = mysqli_query($connection, $query);
-    confirm_query($select_post_by_id);
+    confirm_query($select_post_by_id); //phpcs:ignore
 
     while ($row = mysqli_fetch_assoc($select_post_by_id)) {
         $post_id = $row["post_id"];
@@ -19,13 +19,44 @@ if(isset($_GET["p_id"])){
         $post_comment_count = $row["post_comment_count"];
         $post_date = $row["post_date"];
     }
+
+if (isset($_POST["update_post"])) {
+
+    $post_title = $_POST["post_title"];
+    // $post_categoty_id = $_POST["post_category_id"];
+    $post_author = $_POST["post_author"];
+    $post_status = $_POST["post_status"];
+    $post_image = $_FILES["image"]["name"];
+    $post_image_temp =$_FILES["image"]["tmp_name"];
+    $post_tags = $_POST["post_tags"];
+    $post_content = $_POST["post_content"];
+
+    move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    if (empty($post_image)) {
+            
+        $query = "SELECT * FROM posts WHERE post_id = '{$the_post_id}'";
+        $upload_image = mysqli_query($connection, $query);
+        while ($row = mysqli_fetch_assoc($upload_image)) {
+            $post_image = $row["post_image"];
+        }
+    }
+
+    $query = "UPDATE posts SET post_title = '{$post_title}', post_date = now(), post_author = '{$post_author}', post_status = '{$post_status}', post_image = '{$post_image}', post_tags = '{$post_tags}', post_content = '{$post_content}' WHERE post_id = $the_post_id ";
+        
+    $update_query = mysqli_query($connection, $query);
+    confirm_query($select_post_by_id); //phpcs:ignore
+
+    echo "<h1 class='text-success'>Post Updated Successfuly</h1>";
+}
+    
 ?>
 
 <form action=""class="col-xs-6" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input value="<?php echo $post_title ;?>" type="text" class="form-control" name="title">
+        <input value="<?php echo $post_title ;?>" type="text" class="form-control" name="post_title">
     </div>
     <div class="form-group">
         <select name="post_category" id="post_category">
@@ -50,6 +81,7 @@ if(isset($_GET["p_id"])){
     </div>
     <div class="form-group">
         <img width="100" src="../images/<?php echo $post_image ;?>" alt="">
+        <input type="file" name="image">
     </div>
     <div class="form-group">
         <label for="post_tags">Post Tags</label>
@@ -62,7 +94,7 @@ if(isset($_GET["p_id"])){
         </textarea>
     </div>
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">
     </div>
     
 </form>
