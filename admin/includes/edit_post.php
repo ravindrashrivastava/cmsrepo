@@ -48,6 +48,7 @@ if (isset($_POST["update_post"])) {
     confirm_query($select_post_by_id); //phpcs:ignore
 
     echo "<h1 class='text-success'>Post Updated Successfuly</h1>";
+    
 }
     
 ?>
