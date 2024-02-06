@@ -3,18 +3,16 @@
 function insert_category() {
     global $connection;
     if (isset($_POST["submit"])) {
-        echo "aayushi";
-        // $cat_title = $_POST["cat_title"];
-
-        // if ($cat_title == "" || empty($cat_title)) {
-        //     echo "This field should not be empty";
-        // } else {
-        //     $query = "INSERT INTO category(cat_title) VALUE ('{$cat_title}')";
-        //     $create_category_query = mysqli_query($connection, $query);
-        //     if (!$create_category_query) {
-        //         die("Query Failed".mysqli_error($connection));
-        //     }
-        // }
+        $cat_title = $_POST["cat_title"];
+        if ($cat_title == "" || empty($cat_title)) {
+            echo "This field should not be empty";
+        } else {
+            $query = "INSERT INTO category(cat_title) VALUE ('{$cat_title}')";
+            $create_category_query = mysqli_query($connection, $query);
+            if (!$create_category_query) {
+                die("Query Failed".mysqli_error($connection));
+            }
+        }
     }
 }
 

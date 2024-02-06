@@ -1,29 +1,30 @@
 <?php
-if(isset($_GET["p_id"])){
-    $the_post_id =  $_GET["p_id"];
+if(!isset($_GET["p_id"])){
+    return;
+}
+$the_post_id =  $_GET["p_id"];
+$query = "SELECT * FROM posts WHERE post_id=$the_post_id";
+$select_post_by_id = mysqli_query($connection, $query);
+confirm_query($select_post_by_id); //phpcs:ignore
+
+while ($row = mysqli_fetch_assoc($select_post_by_id)) {
+    $post_id = $row["post_id"];
+    $post_author = $row["post_author"];
+    $post_title = $row["post_title"];
+    $post_category_id = $row["post_category_id"];
+    $post_status = $row["post_status"];
+    $post_image = $row["post_image"];
+    $post_tags = $row["post_tags"];
+    $post_content = $row["post_content"];
+    $post_comment_count = $row["post_comment_count"];
+    $post_date = $row["post_date"];
 }
 
-    $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
-    $select_post_by_id = mysqli_query($connection, $query);
-    confirm_query($select_post_by_id); //phpcs:ignore
-
-    while ($row = mysqli_fetch_assoc($select_post_by_id)) {
-        $post_id = $row["post_id"];
-        $post_author = $row["post_author"];
-        $post_title = $row["post_title"];
-        $post_category_id = $row["post_category_id"];
-        $post_status = $row["post_status"];
-        $post_image = $row["post_image"];
-        $post_tags = $row["post_tags"];
-        $post_content = $row["post_content"];
-        $post_comment_count = $row["post_comment_count"];
-        $post_date = $row["post_date"];
-    }
 
 if (isset($_POST["update_post"])) {
 
     $post_title = $_POST["post_title"];
-    // $post_categoty_id = $_POST["post_category_id"];
+    $post_categoty_id = $_POST["post_category_id"];
     $post_author = $_POST["post_author"];
     $post_status = $_POST["post_status"];
     $post_image = $_FILES["image"]["name"];
@@ -31,7 +32,7 @@ if (isset($_POST["update_post"])) {
     $post_tags = $_POST["post_tags"];
     $post_content = $_POST["post_content"];
 
-    move_uploaded_file($post_image_temp, "../images/$post_image");
+   move_uploaded_file($post_image_temp, "../images/$post_image");
 
     if (empty($post_image)) {
             
@@ -41,11 +42,12 @@ if (isset($_POST["update_post"])) {
             $post_image = $row["post_image"];
         }
     }
+ 
 
-    $query = "UPDATE posts SET post_title = '{$post_title}', post_date = now(), post_author = '{$post_author}', post_status = '{$post_status}', post_image = '{$post_image}', post_tags = '{$post_tags}', post_content = '{$post_content}' WHERE post_id = $the_post_id ";
+    $query = "UPDATE posts SET post_title = '{$post_title}', post_category_id = '{$post_categoty_id}', post_date = now(), post_author = '{$post_author}', post_status = '{$post_status}', post_image = '{$post_image}', post_tags = '{$post_tags}', post_content = '{$post_content}' WHERE post_id = $the_post_id ";
         
     $update_query = mysqli_query($connection, $query);
-    confirm_query($select_post_by_id); //phpcs:ignore
+    confirm_query($update_query); //phpcs:ignore
 
     echo "<h1 class='text-success'>Post Updated Successfuly</h1>";
     
@@ -60,14 +62,16 @@ if (isset($_POST["update_post"])) {
         <input value="<?php echo $post_title ;?>" type="text" class="form-control" name="post_title">
     </div>
     <div class="form-group">
-        <select name="post_category" id="post_category">
+        <label for="title">Post Category Id</label>
+        <select name="post_category_id" class="form-control">
             <?php 
             $query = "SELECT * FROM category";
             $select_categories = mysqli_query($connection, $query);
             while($row = mysqli_fetch_assoc($select_categories)) {
                 $cat_id = $row["cat_id"];
                 $cat_title = $row["cat_title"];
-                echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                $selected = ($post_category_id === $cat_id)?"selected":"";
+                echo "<option value='{$cat_id}' {$selected}>{$cat_title}</option>";
             }
             ?>
         </select>
