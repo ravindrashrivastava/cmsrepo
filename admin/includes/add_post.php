@@ -19,7 +19,7 @@ if (isset($_POST["create_post"])) {
 
     $query = "INSERT INTO posts(post_category_id, post_title, post_author,post_date, post_image, post_content, post_tags, post_comment_count, post_status) VALUES ('{$post_categoty_id}', '{$post_title}', '{$post_author}',now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}')";
 
-    $connection = mysqli_connect("localhost","root","","cms");
+    $connection = mysqli_connect("localhost","root","","cmsrepo");
 
     $create_post_query = mysqli_query($connection, $query);
 

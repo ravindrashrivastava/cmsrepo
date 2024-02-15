@@ -12,7 +12,12 @@
 
                 <?php 
                 include "includes/db.php";
-                $query = "SELECT * FROM posts";
+
+                if (isset($_GET["category"])) {
+                    $post_category_id = $_GET["category"];
+                }
+
+                $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id";
                 $select_all_post_query = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($select_all_post_query)){
                     $post_id = $row["post_id"];
