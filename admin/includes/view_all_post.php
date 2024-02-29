@@ -10,6 +10,8 @@
             <th>Tags</th>
             <th>Comment count</th>
             <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         
     </thead>

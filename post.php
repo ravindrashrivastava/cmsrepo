@@ -70,6 +70,10 @@
                     if (!$comment_create_que) {
                        die('Query Failed'.mysqli_error($connection));
                     }
+
+                    $que = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $comment_post_id";
+                    $post_comment_count_que = mysqli_query($connection,$que);
+                   
                     
                 }
                 

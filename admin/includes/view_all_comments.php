@@ -67,7 +67,7 @@
 
                 <td><a href='comments.php?approve_c_id=<?php echo $comment_id ;?>'>Approve</a></td>
                 <td><a href='comments.php?unapprove_c_id=<?php echo $comment_id ;?>'>Unapprove</a></td>
-                <td><a href='comments.php?delete_comment_id=<?php echo $comment_id;?><?php ?>'>Delete</a></td>
+                <td><a href='comments.php?delete_comment_id=<?php echo $comment_id;?>&cp_id=<?php echo $comment_post_id ;?>'>Delete</a></td>
                 </tr>
                 
             <?php } ?>
@@ -92,11 +92,22 @@ if (isset($_GET["unapprove_c_id"])) {
 }
 
 
+
 if (isset($_GET["delete_comment_id"])) {
 $delete_comment_id = $_GET["delete_comment_id"];
 $query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id}";
 $delete_query = mysqli_query($connection, $query);
 header("Location: ./comments.php");
+
+
+}
+if (isset($_GET["cp_id"])) {
+    $comment_post_id = $_GET["cp_id"];
+    $que = "UPDATE posts SET post_comment_count = post_comment_count - 1 WHERE post_id = $comment_post_id";
+    $update_post_comment_count = mysqli_query($connection, $que);
+    header("Location: ./comments.php");
+    
+    
 }
 
 
