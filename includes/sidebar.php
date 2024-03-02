@@ -18,6 +18,23 @@
     <!-- /.input-group -->
 </div>
 
+<!-- Login -->
+<div class="well">
+    <h4>Login</h4>
+    <form action="/php/cmsrepo/includes/login.php" method="post">
+        <div class="form-group">
+            <input name="username" type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="input-group">
+            <input name="password" type="password" class="form-control" placeholder="Password">
+            <span class="input-group-btn">
+                <button name="login" class="btn btn-primary" type="submit">Login</button>
+            </span>
+        </div>
+    </form> <!--login form end-->
+    
+</div>
+
 <!-- Blog Categories Well -->
 <div class="well">
 
