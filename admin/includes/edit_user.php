@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 if (isset($_GET["edit_user"])) {
 
-    echo $edit_user_id = $_GET["edit_user"];
+    $edit_user_id = $_GET["edit_user"];
 
     $que = "SELECT * FROM users WHERE user_id = $edit_user_id";
 
@@ -33,14 +33,15 @@ if (isset($_POST["update_user"])) {
 
         $que = "UPDATE users SET user_firstname = '{$user_firstname}',  user_lastname = '{$user_lastname}', user_role = '{$user_role}', user_email = '{$user_email}', username = '{$username}' WHERE user_id = $edit_user_id";
 
-        echo $que;
 
         $user_update_que = mysqli_query($connection,$que);
+
+        echo "User details updated successfully";
 
 
 
 }
-
+echo "back to " . "<a href='./users.php?source=includes/view_all_users.php'>view users</a>";
 
 //     $user_firstname = $_POST["user_firstname"];
 //     $user_lastname = $_POST["user_lastname"];

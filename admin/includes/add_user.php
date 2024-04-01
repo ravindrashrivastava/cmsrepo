@@ -23,9 +23,9 @@ if (isset($_POST["create_user"])) {
       die("Querry Failed " . mysqli_error($connection));
     } else {
         echo "<h2 class='text-success'>User created sucessfully</h2>";
+        echo "<a href='./users.php?source=includes/view_all_users.php'>view users</a> ";
     }
 }
-
 ?>
 
 <form action=""class="col-xs-6" method="post" enctype="multipart/form-data">
