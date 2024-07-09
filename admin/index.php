@@ -159,7 +159,11 @@
                 </div>
                                 <!-- /.row -->
                 <?php 
-                
+
+                    $que = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $published_post_count_que = mysqli_query($connection, $que);
+                    $published_post_count = mysqli_num_rows($published_post_count_que);
+
                     $que = "SELECT * FROM posts WHERE post_status = 'draft'";
                     $draft_post_count_que = mysqli_query($connection, $que);
                     $draft_post_count = mysqli_num_rows($draft_post_count_que);
@@ -186,10 +190,10 @@
 
                         <?php 
                         
-                        $element_data = ['Active Post','Draft Post','Comment','Pending Comment','User','Subscribers','Category'];
-                        $element_count = [$post_count, $draft_post_count, $comment_count, $unapproved_comment_count, $user_count, $subscriber_count, $category_count];
+                        $element_data = ['All Post','Active Post','Draft Post','Comment','Pending Comment','User','Subscribers','Category'];
+                        $element_count = [$post_count, $published_post_count, $draft_post_count, $comment_count, $unapproved_comment_count, $user_count, $subscriber_count, $category_count];
                         
-                        for ($i=0; $i < 7; $i++) { 
+                        for ($i=0; $i < 8; $i++) { 
                             echo "['{$element_data[$i]}'" . "," . "{$element_count[$i]}],";
                         }
                         ?>
